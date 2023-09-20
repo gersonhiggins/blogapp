@@ -8,7 +8,6 @@ This is an Ruby on Reels Project. Blog App
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -45,26 +44,55 @@ Tables:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Live Demo
-
-N/A
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 ## 💻 Getting Started <a name="getting-started"></a>
 
-Just to get information abiut my work
-
-To get a local copy up and running, follow these steps.
+> Ruby
 
 ### Prerequisites
 
 In order to run this project you need:
 
-Visual Studio Code, Or another coding program.
-Git App
-Use this code to copy the project: git@github.com:gersonhiggins/bloggapp
+In order to run this project you need:
+
+✅ Install Ruby <br>
+✅ Create a repo on your repository files <br>
+✅ Clone or make a copy of this repo on your local machine <br>
+
+### Setup
+
+Clone this repository to your desired folder:
+
+
+```sh
+  cd oop-ruby
+  git clone https://github.com/gersonhiggins/blogapp.git
+```
+
+### Install
+
+Install this project with:
+
+```bash
+bundle install
+```
+
+### Usage
+
+You can use This as ruby oop example
+
+### Run tests
+
+To run tests, run the following command:
+
+```bash
+ rspec spec/*
+```
+
+### Deployment
+
+```bash
+ rails s
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
