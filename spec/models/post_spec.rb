@@ -13,7 +13,7 @@ RSpec.describe Post, type: :model do
   describe '#update_post_counter' do
     it 'updates the post counter of the associated user' do
       user = create(:user)
-      post = create(:post, user: user)
+      post = create(:post, user:)
 
       expect { post.update_post_counter }.to change { user.reload.post_counter }.by(1)
     end
@@ -22,12 +22,16 @@ RSpec.describe Post, type: :model do
   describe '#recent_comments' do
     it 'returns the specified number of recent comments for the post' do
       post = create(:post)
-      comment1 = create(:comment, post: post, content: "This is a comment.", created_at: 1.day.ago)
-      comment2 = create(:comment, post: post, content: "Another comment.", created_at: 2.days.ago)
+      comment1 = create(:comment, post:, content: 'This is a comment.', created_at: 1.day.ago)
+      comment2 = create(:comment, post:, content: 'Another comment.', created_at: 2.days.ago)
 
       recent_comments = post.recent_comments(1)
 
       expect(recent_comments).to eq([comment1])
+
+      recent_comments = post.recent_comments(2)
+
+      expect(recent_comments).to eq([comment1, comment2])
     end
   end
 end

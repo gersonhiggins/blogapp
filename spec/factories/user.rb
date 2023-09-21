@@ -4,4 +4,3 @@ FactoryBot.define do
     post_counter { 0 }
   end
 end
-

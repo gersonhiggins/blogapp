@@ -12,22 +12,23 @@ RSpec.describe User, type: :model do
     it 'returns the specified number of recent posts, ordered by creation date' do
       user = create(:user)
 
-      # Creating posts for the user with different creation dates
-      post1 = create(:post, user: user, created_at: 1.day.ago)
-      post2 = create(:post, user: user, created_at: 2.days.ago)
-      post3 = create(:post, user: user, created_at: 3.days.ago)
+      post1 = create(:post, user:, created_at: 1.day.ago)
+      post2 = create(:post, user:, created_at: 2.days.ago)
+      post3 = create(:post, user:, created_at: 3.days.ago)
 
-      # Call the method to get recent posts
       recent_posts = user.recent_posts(2)
 
-      # Ensure the posts are ordered by creation date
       expect(recent_posts).to eq([post1, post2])
+
+      recent_posts = user.recent_posts(3)
+
+      expect(recent_posts).to eq([post1, post2, post3])
     end
 
     it 'returns all posts if the count is greater than the total number of posts' do
       user = create(:user)
-      post1 = create(:post, user: user)
-      post2 = create(:post, user: user)
+      post1 = create(:post, user:)
+      post2 = create(:post, user:)
 
       recent_posts = user.recent_posts(10)
 
