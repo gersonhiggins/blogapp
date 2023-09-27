@@ -13,6 +13,10 @@ class Post < ApplicationRecord
 
   before_validation :initialize_likes_and_comments_counter, on: :create
 
+  def recent_comments(count)
+    comments.order(created_at: :desc).limit(count)
+  end
+
   private
 
   def increment_user_post_counter

@@ -56,3 +56,12 @@ p {
 .post-item {
   display: block;
 }
+
+.counter {
+  margin: 0;
+}
+
+.post-li {
+  width: 360px;
+  left: 0;
+}
