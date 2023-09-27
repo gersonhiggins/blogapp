@@ -1,13 +1,26 @@
-<h1>Hola<%= @post.title %></h1>
-<p>Comments Count: <%= @post.comments_counter %></p>
-<p>Likes Count: <%= @post.likes_counter %></p>
-<p><%= @post.created_at %></p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Show Post</title>
+</head>
+<body>
+  <div class="post">
+    <h2><%= @post.title %></h2>
+    <p><%= @post.text %></p>
+  </div>
 
-<h2>Recent Comments:</h2>
-<ul>
-  <% @post.recent_comments(5).each do |comment| %>
-    <li><%= comment.content %></li>
-  <% end %>
-</ul>
+  <div class="comments">
+    <h3>Comments:</h3>
+    <ul>
+      <% @post.comments.each do |comment| %>
+        <li><%= comment.text %></li>
+      <% end %>
+      <% if @post.comments.empty? %>
+        <li>No comments yet.</li>
+      <% end %>
+    </ul>
+  </div>
 
-<%= link_to 'Back to Posts', user_posts_path(@post.user) %>
+  <%= link_to 'Back to Posts', user_posts_path(@post.user) %>
+</body>
+</html>

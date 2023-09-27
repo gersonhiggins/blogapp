@@ -1,2 +1,22 @@
-<h1>User Profile</h1>
-<p>Name: <%= @user.name %></p>
+<div class="profile-box">
+    <div class="image-profile"><%= image_tag @user.photo, alt: 'User Photo' if @user.photo.present? %></div>
+    <div class="box">
+        <h2><%= @user.name %></h2>
+        <p><%= link_to "Post Counter:", user_posts_path(@user) %><%= @user.post_counter %></p>
+
+    </div>
+</div>
+
+<div class="bio">
+    <%= @user.bio %>
+</div>
+
+<ul>
+  <% @user.posts.each do |post| %>
+    <li>
+      <p>post n.<%=post.user.post_counter%></p>
+      <strong>Title:</strong> <%= link_to post.title, user_post_path(@user, post) %><br>    
+      <strong>Text:</strong> <%= post.text %>
+    </li>
+  <% end %>
+</ul>

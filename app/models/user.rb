@@ -6,7 +6,15 @@ class User < ApplicationRecord
   has_many :comments, foreign_key: 'user_id'
   has_many :likes, foreign_key: 'user_id'
 
+  before_validation :initialize_post_counter, on: :create
+
   def recent_posts(count)
     posts.order(created_at: :desc).limit(count)
+  end
+
+  private
+
+  def initialize_post_counter
+    self.post_counter ||= 0
   end
 end
