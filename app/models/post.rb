@@ -28,4 +28,3 @@ class Post < ApplicationRecord
     self.likes_counter ||= 0
   end
 end
-
