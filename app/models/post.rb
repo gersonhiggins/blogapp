@@ -9,9 +9,13 @@ class Post < ApplicationRecord
   validates :likes_counter, numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
   has_many :comments
-  has_many :likes
+  has_many :likes, as: :likeable
 
   before_validation :initialize_likes_and_comments_counter, on: :create
+
+  def liked_by?(user)
+    likes.exists?(user:)
+  end
 
   def recent_comments(count)
     comments.order(created_at: :desc).limit(count)

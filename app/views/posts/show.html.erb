@@ -7,13 +7,30 @@
   <div class="post">
     <h2><%= @post.title %></h2>
     <p><%= @post.text %></p>
+
+    <!-- Display the number of likes for the post -->
+    <p><strong>Likes:</strong> <%= @post.likes_counter %></p>
+
+    <!-- Include like button for the post -->
+    <%= render partial: 'shared/like_button', locals: { likeable: @post, user: current_user } %>
+
+    <!-- Include comment form partial for this post -->
+    <%= render partial: 'posts/comment_form', locals: { post: @post } %>
   </div>
 
   <div class="comments">
     <h3>Comments:</h3>
     <ul>
       <% @post.comments.each do |comment| %>
-        <li><%= comment.text %></li>
+        <li>
+          <%= comment.text %>
+
+          <!-- Display the number of likes for the comment -->
+          <p><strong>Likes:</strong> <%= comment.likes_counter %></p>
+
+          <!-- Include like button for the comment -->
+          <%= render partial: 'shared/like_button', locals: { likeable: comment } %>
+        </li>
       <% end %>
       <% if @post.comments.empty? %>
         <li>No comments yet.</li>
@@ -21,6 +38,6 @@
     </ul>
   </div>
 
-  <%= link_to 'Back to Posts', user_posts_path(@post.user) %>
-</body>
-</html>
+ 
+
+
