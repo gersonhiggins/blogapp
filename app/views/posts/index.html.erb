@@ -32,6 +32,9 @@
           <% end %>
         </ul>
       </div>
+
+      <!-- Agregar enlace para crear un nuevo comentario -->
+      <%= link_to "Nuevo Comentario", new_user_post_comment_path(@user, post) %>
     </li>
   <% end %>
 </ul>

@@ -1,42 +1,30 @@
 class LikesController < ApplicationController
-  include Rails.application.routes.url_helpers
-
   def create
-    likeable = find_likeable
-    like = likeable.likes.find_by(user: current_user)
+    @post = Post.find(params[:post_id])
+    like = @post.likes.build(user: current_user)
 
-    if like
-      redirect_back fallback_location: root_path, alert: 'You have already liked this post.'
+    if like.save
+      redirect_to user_post_path(@post.user, @post), notice: 'Post liked!'
     else
-      like = likeable.likes.new(user: current_user)
-      if like.save
-        likeable.update_likes_counter
-        redirect_back fallback_location: root_path, notice: 'Liked!'
-      else
-        redirect_back fallback_location: root_path, alert: 'Error liking the post.'
-      end
+      redirect_to user_post_path(@post.user, @post), alert: 'Error liking the post.'
     end
+  end
+
+  def like_params
+    params.require(:like).permit(:likeable_id, :likeable_type).merge(user_id: current_user.id)
   end
 
   def destroy
     likeable = find_likeable
-    @like = likeable.likes.find_by(user: current_user)
+    like = likeable.likes.find_by(user: current_user)
 
-    if @like.destroy
-      likeable.update_likes_counter # Update likes counter
-      redirect_back fallback_location: root_path, notice: 'Unliked!'
+    if like&.destroy
+      likeable.update_likes_counter
+      flash[:notice] = 'Unliked!'
     else
-      redirect_back fallback_location: root_path, alert: 'Error unliking.'
+      flash[:alert] = 'Error unliking.'
     end
-  end
 
-  private
-
-  def find_likeable
-    if params[:post_id]
-      Post.find(params[:post_id])
-    elsif params[:comment_id]
-      Comment.find(params[:comment_id])
-    end
+    redirect_back fallback_location: root_path
   end
 end

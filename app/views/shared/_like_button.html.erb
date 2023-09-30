@@ -1,5 +1,3 @@
-<% if likeable.liked_by?(user) %>
-  <%= button_to 'Unlike', user_post_unlike_path(user, likeable), method: :delete, remote: true %>
-<% else %>
-  <%= button_to 'Like', user_post_like_path(user, likeable), method: :post, remote: true %>
+<%= form_with(model: [current_user, @post.likes.build], url: user_post_like_path(@post.user, @post), method: :post) do |form| %>
+  <%= form.submit 'Like' %>
 <% end %>

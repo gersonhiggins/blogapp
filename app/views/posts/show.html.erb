@@ -8,14 +8,11 @@
     <h2><%= @post.title %></h2>
     <p><%= @post.text %></p>
 
-    <!-- Display the number of likes for the post -->
     <p><strong>Likes:</strong> <%= @post.likes_counter %></p>
 
-    <!-- Include like button for the post -->
-    <%= render partial: 'shared/like_button', locals: { likeable: @post, user: current_user } %>
-
-    <!-- Include comment form partial for this post -->
-    <%= render partial: 'posts/comment_form', locals: { post: @post } %>
+    <%= render partial: 'shared/like_button', locals: { post: @post } %>
+    
+    <%= link_to "New Comment", new_user_post_comment_path(user_id: @user, post_id: @post) %>
   </div>
 
   <div class="comments">
@@ -24,12 +21,7 @@
       <% @post.comments.each do |comment| %>
         <li>
           <%= comment.text %>
-
-          <!-- Display the number of likes for the comment -->
-          <p><strong>Likes:</strong> <%= comment.likes_counter %></p>
-
-          <!-- Include like button for the comment -->
-          <%= render partial: 'shared/like_button', locals: { likeable: comment } %>
+          <%= comment.content %>
         </li>
       <% end %>
       <% if @post.comments.empty? %>
@@ -38,6 +30,29 @@
     </ul>
   </div>
 
- 
+  <script>
+  function likePost(postId) {
+    fetch(`/users/1/posts/${postId}/like`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({ postId: postId }) // Adjust the payload as needed
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Like successful', data);
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+  }
+</script>
 
 
