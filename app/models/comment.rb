@@ -1,13 +1,12 @@
 class Comment < ApplicationRecord
-  belongs_to :user, class_name: 'User'
+  belongs_to :user, class_name: 'User', foreign_key: :user_id
   belongs_to :post
-  validates_presence_of :content
 
-  has_many :likes, as: :likeable
+  validates :text, presence: true
 
-  def liked_by?(user)
-    likes.exists?(user:)
-  end
+  after_save :update_comments_counter
+
+  private
 
   def update_comments_counter
     post.update(comments_counter: post.comments.count)

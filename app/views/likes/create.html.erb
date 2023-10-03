@@ -1,2 +1,5 @@
-<h1>Likes#create</h1>
-<p>Find me in app/views/likes/create.html.erb</p>
+<%= turbo_stream.replace(
+  @post, 
+  partial: "likes_count",
+  locals: { post: @post }
+) %>

@@ -1,11 +1,10 @@
 class UsersController < ApplicationController
-  # Action for listing all users
   def index
     @users = User.all
   end
 
-  # Action for displaying a single user
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(posts: :comments).find(params[:id])
+    @three_most_recent_posts = @user.posts.order(created_at: :desc).limit(3)
   end
 end

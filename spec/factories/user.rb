@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :user do
-    sequence(:name) { |n| "User #{n}" }
+    name { 'Tom' }
+    bio { 'bio' }
     post_counter { 0 }
   end
 end

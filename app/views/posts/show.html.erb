@@ -1,58 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Show Post</title>
-</head>
-<body>
-  <div class="post">
-    <h2><%= @post.title %></h2>
-    <p><%= @post.text %></p>
-
-    <p><strong>Likes:</strong> <%= @post.likes_counter %></p>
-
-    <%= render partial: 'shared/like_button', locals: { post: @post } %>
-    
-    <%= link_to "New Comment", new_user_post_comment_path(user_id: @user, post_id: @post) %>
+<h2>Post Show Page</h2>
+<div>
+  <div class="user-card left">
+    <h3><%= @post.title %> by <%= @user.name %></h3>
+    <p><%= @post.content %></p>
+    <div class="right">
+      <span class="span-post">Comments: <%= @post.comments.count %></span>
+      <span class="span-post" data-target="likes_count">Likes: <%= @post.likes.count %></span>
+      <%= button_to "Like", user_post_likes_path(@user, @post), method: :post, class: "button", remote: true %>
+    </div>
+    <br>
   </div>
-
-  <div class="comments">
-    <h3>Comments:</h3>
+  <div class="user-card left">
     <ul>
+      <h5>All the Comments:</h5>
+      <br>
       <% @post.comments.each do |comment| %>
-        <li>
-          <%= comment.text %>
-          <%= comment.content %>
-        </li>
-      <% end %>
-      <% if @post.comments.empty? %>
-        <li>No comments yet.</li>
+        <li><%= comment.user.name %>: <%= comment.text %></li>
       <% end %>
     </ul>
   </div>
+</div>
 
-  <script>
-  function likePost(postId) {
-    fetch(`/users/1/posts/${postId}/like`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      },
-      body: JSON.stringify({ postId: postId }) // Adjust the payload as needed
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Like successful', data);
-    })
-    .catch(error => {
-      console.error('There has been a problem with your fetch operation:', error);
-    });
-  }
-</script>
+<%= link_to 'New Comment', new_user_post_comment_path(@user, @post), class: 'button top' %>
 
+<% if @prev_post.present? %>
+  <%= button_to "Previous Post", user_post_path(@user, @prev_post), method: :get, class: "button top" %>
+<% end %>
 
+<% if @next_post.present? %>
+  <%= button_to "Next Post", user_post_path(@user, @next_post), method: :get, class: "button top" %>
+<% end %>

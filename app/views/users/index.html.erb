@@ -1,22 +1,17 @@
-<h1>Here is a list of users</h1>
+<h1 class="index-title">Here is a List of all Users</h1>
+<ul class="user-list">
+  <% @users.each do |user| %>
+    <li class="user-card flex" id="user-card-<%= user.id %>">
+      <div class="user-image border">
+        <img src="<%= user.photo %>" alt="<%= user.name %>'s photo" width="100% heigth="100%">
+      </div>
+      <div class="user-info border">
+        <h2><%= link_to user.name, user_path(user) %></h2>
+        <p class="posts-number">Number of posts: <%= user.posts.count %></p>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
-<%= link_to "Nueva Publicación", new_post_path %>
-
-<% @users.each do |user| %>
-  <div class="user-profile">
-    <div class="image-profile">
-      <%= image_tag user.photo, alt: 'User Photo' if user.photo.present? %>
-    </div>
-    <div class="box">
-      <%= link_to user.name, user_path(user) %>
-      <p>Posts: <%= user.post_counter %></p>
-    </div>
-  </div>
-<% end %>
-
-
-
-
-
-
+<a href="/users/1/posts/new">New Post</a>
 

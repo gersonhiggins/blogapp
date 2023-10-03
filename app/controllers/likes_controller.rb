@@ -1,30 +1,21 @@
 class LikesController < ApplicationController
+  before_action :find_post
+
   def create
-    @post = Post.find(params[:post_id])
-    like = @post.likes.build(user: current_user)
+    @like = Like.new(user: current_user, post: @post)
 
-    if like.save
-      redirect_to user_post_path(@post.user, @post), notice: 'Post liked!'
+    if @like.save
+      flash.now[:notice] = 'Liked the post!'
+      redirect_to user_post_path(@user, @post)
     else
-      redirect_to user_post_path(@post.user, @post), alert: 'Error liking the post.'
+      flash.now[:alert] = 'Failed to like the post!'
     end
   end
 
-  def like_params
-    params.require(:like).permit(:likeable_id, :likeable_type).merge(user_id: current_user.id)
-  end
+  private
 
-  def destroy
-    likeable = find_likeable
-    like = likeable.likes.find_by(user: current_user)
-
-    if like&.destroy
-      likeable.update_likes_counter
-      flash[:notice] = 'Unliked!'
-    else
-      flash[:alert] = 'Error unliking.'
-    end
-
-    redirect_back fallback_location: root_path
+  def find_post
+    @user = User.find(params[:user_id])
+    @post = @user.posts.find(params[:post_id])
   end
 end
