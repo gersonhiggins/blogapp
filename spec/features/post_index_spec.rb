@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.feature 'User Post Index Page', type: :feature do
   let!(:user) { create(:user) }
-  let!(:post1) { create(:post, user: user) }
-  let!(:post2) { create(:post, user: user) }
-  let!(:post3) { create(:post, user: user) }
-  let!(:comment1) { create(:comment, post: post1 ) }
-  let!(:comment2) { create(:comment, post: post2 ) }
-  let!(:comment3) { create(:comment, post: post3 ) }
+  let!(:post1) { create(:post, user:) }
+  let!(:post2) { create(:post, user:) }
+  let!(:post3) { create(:post, user:) }
+  let!(:comment1) { create(:comment, post: post1) }
+  let!(:comment2) { create(:comment, post: post2) }
+  let!(:comment3) { create(:comment, post: post3) }
 
   scenario 'displays user information, posts, and pagination' do
     visit user_posts_path(user)

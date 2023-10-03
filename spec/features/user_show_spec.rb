@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.feature 'User Show Page', type: :feature do
   let!(:user) { create(:user) }
-  let!(:post1) { create(:post, user: user) }
-  let!(:post2) { create(:post, user: user) }
-  let!(:post3) { create(:post, user: user) }
+  let!(:post1) { create(:post, user:) }
+  let!(:post2) { create(:post, user:) }
+  let!(:post3) { create(:post, user:) }
 
   scenario 'displays user information and posts' do
     visit user_path(user)

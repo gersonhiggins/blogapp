@@ -1,13 +1,13 @@
-<h1 class="index-title">Here is a List of all Users</h1>
-<ul class="user-list">
+<h1>Here is a List of all Users</h1>
+<ul>
   <% @users.each do |user| %>
-    <li class="user-card flex" id="user-card-<%= user.id %>">
-      <div class="user-image border">
+    <li id="user-card-<%= user.id %>">
+      <div">
         <img src="<%= user.photo %>" alt="<%= user.name %>'s photo" width="100% heigth="100%">
       </div>
-      <div class="user-info border">
+      <div>
         <h2><%= link_to user.name, user_path(user) %></h2>
-        <p class="posts-number">Number of posts: <%= user.posts.count %></p>
+        <p>Number of posts: <%= user.posts.count %></p>
       </div>
     </li>
   <% end %>
