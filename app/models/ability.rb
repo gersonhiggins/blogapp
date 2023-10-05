@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
   def initialize(user)
-    user ||= User.new # Guest user
+    user ||= User.new
     if user.role == 'admin'
       can :delete, Post
       can :delete, Comment
