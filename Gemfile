@@ -29,13 +29,15 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'bootsnap', require: false
 
+gem 'devise'
+
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
+  gem 'letter_opener'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.0'
   gem 'shoulda-matchers', '~> 4.0'
-
-  gem 'rails-controller-testing'
 end
 
 group :development do

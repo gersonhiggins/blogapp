@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :find_user
   before_action :load_posts, only: [:index]
 

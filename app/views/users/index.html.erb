@@ -13,5 +13,9 @@
   <% end %>
 </ul>
 
+<%= form_tag destroy_user_session_path, method: :delete do %>
+  <%= submit_tag 'Log out', class: 'logout-button' %>
+<% end %>
+
 <a href="/users/1/posts/new">New Post</a>
 
