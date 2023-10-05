@@ -1,5 +1,4 @@
 <h2>Post Show Page</h2>
-<div>
   <div>
     <h3><%= @post.title %> by <%= @user.name %></h3>
     <p><%= @post.content %></p>
@@ -10,19 +9,24 @@
     </div>
     <br>
   </div>
-  <div>
     <ul>
       <h5>All the Comments:</h5>
-      <br>
       <% @post.comments.each do |comment| %>
         <li><%= comment.user.name %>: <%= comment.text %></li>
+        <% if can? :delete, comment %>
+          <%= form_with model: comment, url: user_post_comment_path(@user, @post, comment), class: 'logout-form', method: :delete do |form| %>
+            <%= form.submit 'Delete' %>
+          <% end %>
+        <% end %>
       <% end %>
     </ul>
-  </div>
-</div>
 
 <%= link_to 'New Comment', new_user_post_comment_path(@user, @post) %>
-
+<% if can? :delete, @post %>
+  <%= form_with model: @post, url: user_post_path(@user, @post), class: 'logout-form', method: :delete do |form| %>
+    <%= form.submit 'Delete Post' %>
+  <% end %>
+<% end %>
 <% if @prev_post.present? %>
   <%= button_to "Previous Post", user_post_path(@user, @prev_post), method: :get %>
 <% end %>

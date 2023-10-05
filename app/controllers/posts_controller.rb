@@ -19,6 +19,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+    @post.comments.destroy_all
+    @post.likes.destroy_all
+    authorize! :delete, @post
+
+    @post.destroy
+    redirect_to user_posts_path(@user, @post), notice: 'Post was successfully deleted.'
+  end
+
   def show
     @post = @user.posts.includes(:comments).find(params[:id])
     @next_post = @user.posts.where('id > ?', @post.id).first

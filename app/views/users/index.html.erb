@@ -17,5 +17,5 @@
   <%= submit_tag 'Log out', class: 'logout-button' %>
 <% end %>
 
-<a href="/users/1/posts/new">New Post</a>
+<a href="<%= new_user_post_path(current_user) %>">New Post</a>
 

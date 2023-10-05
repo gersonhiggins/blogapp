@@ -1,5 +1,6 @@
 require_relative "boot"
-
+require 'cancancan'
+require_relative '../app/models/ability'
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
