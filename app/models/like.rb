@@ -7,6 +7,7 @@ class Like < ApplicationRecord
   def as_json(_options = {})
     { author_id:, text:, id: }
   end
+
   private
 
   def update_likes_counter

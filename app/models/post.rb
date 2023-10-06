@@ -12,10 +12,11 @@ class Post < ApplicationRecord
   def five_most_recent_comments
     comments.order(created_at: :desc).limit(5)
   end
-  
+
   def as_json(_options = {})
     { title:, text:, id: }
   end
+
   private
 
   def update_post_counter
