@@ -33,6 +33,10 @@ gem 'devise'
 
 gem 'cancancan'
 
+gem 'active_model_serializers', '~> 0.10.13'
+
+gem 'responders'
+
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
