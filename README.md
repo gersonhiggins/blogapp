@@ -103,6 +103,11 @@ To run tests, run the following command:
 
 - GitHub: [@gitgersonhiggins](https://github.com/gersonhiggins)
 
+👤 Nico Emiliano
+
+- GitHub: [@gitnicoemiliano](https://github.com/Zven94)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
