@@ -1,0 +1,36 @@
+<h2>Post Show Page</h2>
+  <div>
+    <h3><%= @post.title %> by <%= @user.name %></h3>
+    <p><%= @post.content %></p>
+    <div>
+      <span>Comments: <%= @post.comments.count %></span>
+      <span data-target="likes_count">Likes: <%= @post.likes.count %></span>
+      <%= button_to "Like", user_post_likes_path(@user, @post), method: :post, class: "button", remote: true %>
+    </div>
+    <br>
+  </div>
+    <ul>
+      <h5>All the Comments:</h5>
+      <% @post.comments.each do |comment| %>
+        <li><%= comment.user.name %>: <%= comment.text %></li>
+        <% if can? :delete, comment %>
+          <%= form_with model: comment, url: user_post_comment_path(@user, @post, comment), class: 'logout-form', method: :delete do |form| %>
+            <%= form.submit 'Delete' %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+
+<%= link_to 'New Comment', new_user_post_comment_path(@user, @post) %>
+<% if can? :delete, @post %>
+  <%= form_with model: @post, url: user_post_path(@user, @post), class: 'logout-form', method: :delete do |form| %>
+    <%= form.submit 'Delete Post' %>
+  <% end %>
+<% end %>
+<% if @prev_post.present? %>
+  <%= button_to "Previous Post", user_post_path(@user, @prev_post), method: :get %>
+<% end %>
+
+<% if @next_post.present? %>
+  <%= button_to "Next Post", user_post_path(@user, @next_post), method: :get %>
+<% end %>

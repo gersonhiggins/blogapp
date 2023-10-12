@@ -1,0 +1,24 @@
+<h1>All Posts</h1>
+<div>
+  <div>
+    <div>
+      <img src="<%= @user.photo %>" alt="<%= @user.name %>'s photo" width="100%" heigth="100%">
+    </div>
+    <div>
+      <h2><%= @user.name %></h2>
+      <p>Number of posts: <%= @user.posts.count %></p>
+    </div>
+  </div>
+</div>
+
+<% @posts.each do |post| %>
+  <div>
+    <h3><%= link_to post.title, user_post_path(@user, post) %></h3>
+    <p><%= truncate(post.content, length: 100) %></p>
+    <p>Number of comments: <%= post.comments.count %></p>
+    <p>First comment: <%= post.comments.first.text if post.comments.first %></p>
+    <p>Number of likes: <%= post.likes.count %></p>
+  </div>
+<% end %>
+
+<%= paginate @posts, param_name: 'page', class: 'button' %>
