@@ -1,0 +1,17 @@
+<h1>Here is a List of all Users</h1>
+<ul>
+  <% @users.each do |user| %>
+    <li id="user-card-<%= user.id %>">
+      <div">
+        <img src="<%= user.photo %>" alt="<%= user.name %>'s photo" width="100% heigth="100%">
+      </div>
+      <div>
+        <h2><%= link_to user.name, user_path(user) %></h2>
+        <p>Number of posts: <%= user.posts.count %></p>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<a href="/users/1/posts/new">New Post</a>
+

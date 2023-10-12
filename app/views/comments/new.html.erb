@@ -1,0 +1,25 @@
+<h2>New Comment</h2>
+<% if @comment.errors.any? %>
+  <div>
+    <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+    <ul>
+    <% @comment.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: [@user, @post, Comment.new], url: user_post_comments_path(@user, @post)) do |form| %>
+  <div>
+    <%= form.label :text, "Comment" %>
+    <%= form.text_area :text, rows: 4 %>
+  </div>
+
+  <div>
+    <%= form.submit 'Create Comment', class: 'button' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', user_post_path(@user, @post), class: 'button' %>
