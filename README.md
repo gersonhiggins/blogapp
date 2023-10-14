@@ -14,13 +14,12 @@ This is an Ruby on Reels Project. Blog App
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
-  - [Deployment](#triangular_flag_on_post-deployment)
+  - [Deployment](#deployment)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
 - [🙏 Acknowledgements](#acknowledgements)
-- [❓ FAQ (OPTIONAL)](#faq)
 - [📝 License](#license)
 
 
@@ -103,6 +102,11 @@ To run tests, run the following command:
 👤 Gerson Higgins
 
 - GitHub: [@gitgersonhiggins](https://github.com/gersonhiggins)
+
+👤 Nico Emiliano
+
+- GitHub: [@gitnicoemiliano](https://github.com/Zven94)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
