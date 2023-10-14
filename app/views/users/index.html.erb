@@ -1,0 +1,12 @@
+<h1>Here is a list of users</h1>
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <div class="image-profile"><%= image_tag user.photo, alt: 'User Photo' if user.photo.present? %></div>
+      <div class="box">
+        <%= link_to user.name, user_path(user) %>
+        <p>Posts: <%= user.post_counter %></p>
+      </div>
+    </li>
+  <% end %>
+</ul>

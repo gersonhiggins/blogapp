@@ -1,0 +1,37 @@
+<div class="profile-box">
+  <div class="image-profile">
+    <%= image_tag @user.photo, alt: 'User Photo' if @user.photo.present? %>
+  </div>
+  <div class="box">
+    <h2><%= @user.name %></h2>
+    <p>
+      <%= link_to "Post Counter:", user_posts_path(@user) %>
+      <span class="post-counter"><%= @user.post_counter %></span>
+    </p>
+  </div>
+</div>
+
+<ul class="post-list">
+  <% @user.posts.each do |post| %>
+    <li class="post-item">
+      <div class="post-content">
+        <p class="post-counter">Post No. <%= post.user.post_counter %></p>
+        <strong>Title:</strong>
+        <%= link_to post.title, user_post_path(@user, post) %><br>
+        <strong>Text:</strong> <%= post.text %>
+      </div>
+
+      <div class="comments">
+        <strong>Comments:</strong>
+        <ul>
+          <% post.recent_comments(5).each do |comment| %>
+            <li><%= comment.text %></li>
+          <% end %>
+          <% if post.comments.empty? %>
+            <li>No comments yet.</li>
+          <% end %>
+        </ul>
+      </div>
+    </li>
+  <% end %>
+</ul>
