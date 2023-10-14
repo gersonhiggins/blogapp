@@ -1,0 +1,13 @@
+<h1>Hola<%= @post.title %></h1>
+<p>Comments Count: <%= @post.comments_counter %></p>
+<p>Likes Count: <%= @post.likes_counter %></p>
+<p><%= @post.created_at %></p>
+
+<h2>Recent Comments:</h2>
+<ul>
+  <% @post.recent_comments(5).each do |comment| %>
+    <li><%= comment.content %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to Posts', user_posts_path(@post.user) %>
