@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Show Post</title>
+</head>
+<body>
+  <div class="post">
+    <h2><%= @post.title %></h2>
+    <p><%= @post.text %></p>
+
+    <p><strong>Likes:</strong> <%= @post.likes_counter %></p>
+
+    <%= render partial: 'shared/like_button', locals: { post: @post } %>
+    
+    <%= link_to "New Comment", new_user_post_comment_path(user_id: @user, post_id: @post) %>
+  </div>
+
+  <div class="comments">
+    <h3>Comments:</h3>
+    <ul>
+      <% @post.comments.each do |comment| %>
+        <li>
+          <%= comment.text %>
+          <%= comment.content %>
+        </li>
+      <% end %>
+      <% if @post.comments.empty? %>
+        <li>No comments yet.</li>
+      <% end %>
+    </ul>
+  </div>
+
+  <script>
+  function likePost(postId) {
+    fetch(`/users/1/posts/${postId}/like`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({ postId: postId }) // Adjust the payload as needed
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Like successful', data);
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+  }
+</script>
+
+
